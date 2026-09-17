@@ -170,13 +170,13 @@ const files = [
   ["services/film-removal.svg", facade({ seed: "svc-film", accent: "squeegee", caption: "시트지 제거" })],
   ["services/maintenance.svg", facade({ seed: "svc-maint", accent: "spray", caption: "정기 관리" })],
 
-  // Before & After
-  ["before-after/glass-before.svg", facade({ seed: "ba-glass", w: 1000, h: 750, state: "dirty", badge: "BEFORE" })],
-  ["before-after/glass-after.svg", facade({ seed: "ba-glass", w: 1000, h: 750, badge: "AFTER", accent: "squeegee" })],
-  ["before-after/wall-before.svg", facade({ seed: "ba-wall", w: 1000, h: 750, state: "dirty", badge: "BEFORE" })],
-  ["before-after/wall-after.svg", facade({ seed: "ba-wall", w: 1000, h: 750, badge: "AFTER", accent: "spray" })],
-  ["before-after/sign-before.svg", facade({ seed: "ba-sign", w: 1000, h: 750, state: "dirty", badge: "BEFORE", accent: "sign" })],
-  ["before-after/sign-after.svg", facade({ seed: "ba-sign", w: 1000, h: 750, badge: "AFTER", accent: "sign" })],
+  // Before & After – 칩은 슬라이더 컴포넌트가 좌/우에 올립니다.
+  ["before-after/glass-before.svg", facade({ seed: "ba-glass", w: 1000, h: 750, state: "dirty" })],
+  ["before-after/glass-after.svg", facade({ seed: "ba-glass", w: 1000, h: 750, accent: "squeegee" })],
+  ["before-after/wall-before.svg", facade({ seed: "ba-wall", w: 1000, h: 750, state: "dirty" })],
+  ["before-after/wall-after.svg", facade({ seed: "ba-wall", w: 1000, h: 750, accent: "spray" })],
+  ["before-after/sign-before.svg", facade({ seed: "ba-sign", w: 1000, h: 750, state: "dirty", accent: "sign" })],
+  ["before-after/sign-after.svg", facade({ seed: "ba-sign", w: 1000, h: 750, accent: "sign" })],
 
   // 시공 사례
   ["portfolio/seoul-office-glass.svg", facade({ seed: "p1", accent: "squeegee" })],

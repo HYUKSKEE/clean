@@ -39,6 +39,12 @@ export function BeforeAfterSlider({
         sizes="(min-width: 1024px) 60vw, 100vw"
         className="object-cover"
       />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute top-3 right-3 rounded-full bg-brand px-3 py-1 text-xs font-bold tracking-wide text-ink"
+      >
+        AFTER
+      </span>
 
       <div
         className="absolute inset-0"
@@ -51,6 +57,12 @@ export function BeforeAfterSlider({
           sizes="(min-width: 1024px) 60vw, 100vw"
           className="object-cover"
         />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute top-3 left-3 rounded-full bg-ink/80 px-3 py-1 text-xs font-bold tracking-wide text-white"
+        >
+          BEFORE
+        </span>
       </div>
 
       {/* 경계선 + 손잡이 (표시 전용, 실제 조작은 아래 range 가 담당) */}
