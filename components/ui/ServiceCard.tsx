@@ -8,7 +8,7 @@ export function ServiceCard({ service }: { service: Service }) {
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white transition-colors hover:border-brand-strong">
-      <div className="relative aspect-4/3 overflow-hidden bg-surface">
+      <figure className="relative m-0 aspect-4/3 overflow-hidden bg-surface">
         <Image
           src={service.image}
           alt={service.imageAlt}
@@ -16,7 +16,8 @@ export function ServiceCard({ service }: { service: Service }) {
           sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
           className="object-cover"
         />
-      </div>
+        <figcaption className="sr-only">{service.imageAlt}</figcaption>
+      </figure>
 
       <div className="flex flex-1 flex-col p-6">
         <span className="grid size-11 place-items-center rounded-xl bg-brand-soft">
@@ -47,9 +48,8 @@ export function ServiceCard({ service }: { service: Service }) {
         <Link
           href={href}
           className="mt-5 inline-flex min-h-11 items-center gap-1.5 text-sm font-bold text-ink group-hover:text-brand-deep"
-          aria-label={`${service.title} 상세 보기`}
         >
-          상세 보기
+          {service.title} 상세 보기
           <ArrowUpRight className="size-4" aria-hidden />
         </Link>
       </div>

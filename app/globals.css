@@ -51,6 +51,15 @@
   h3 {
     letter-spacing: -0.02em;
   }
+
+  /* FAQ details – 기본 마커를 숨기고 커스텀 아이콘을 사용합니다 */
+  summary {
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
 }
 
 @layer components {

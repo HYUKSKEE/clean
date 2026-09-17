@@ -15,28 +15,30 @@ export function Footer() {
               {site.areas.join(" · ")} 유리창 · 외벽 · 간판 청소 전문. 전문 장비와 친환경 세제로
               안전하게 시공합니다.
             </p>
-            <ul className="mt-5 flex flex-col gap-2.5 text-[0.925rem]">
-              <li className="flex items-center gap-2.5">
-                <Phone className="size-4 shrink-0 text-brand-deep" aria-hidden />
-                <a href={telHref} className="font-bold hover:text-brand-deep">
-                  {site.phone}
-                </a>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <Mail className="size-4 shrink-0 text-brand-deep" aria-hidden />
-                <a href={`mailto:${site.email}`} className="text-ink-soft hover:text-ink">
-                  {site.email}
-                </a>
-              </li>
-              <li className="flex items-start gap-2.5 text-ink-soft">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-brand-deep" aria-hidden />
-                {site.address}
-              </li>
-            </ul>
+            <address className="mt-5 not-italic">
+              <ul className="flex flex-col gap-2.5 text-[0.925rem]">
+                <li className="flex items-center gap-2.5">
+                  <Phone className="size-4 shrink-0 text-brand-deep" aria-hidden />
+                  <a href={telHref} className="font-bold hover:text-brand-deep">
+                    {site.phone}
+                  </a>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Mail className="size-4 shrink-0 text-brand-deep" aria-hidden />
+                  <a href={`mailto:${site.email}`} className="text-ink-soft hover:text-ink">
+                    {site.email}
+                  </a>
+                </li>
+                <li className="flex items-start gap-2.5 text-ink-soft">
+                  <MapPin className="mt-0.5 size-4 shrink-0 text-brand-deep" aria-hidden />
+                  {site.address}
+                </li>
+              </ul>
+            </address>
           </div>
 
           <nav aria-label="푸터 서비스 메뉴">
-            <h2 className="text-sm font-bold tracking-wide text-ink-muted uppercase">Services</h2>
+            <p className="text-sm font-bold tracking-wide text-ink-muted uppercase">서비스</p>
             <ul className="mt-4 flex flex-col gap-1">
               {services.map((service) => (
                 <li key={service.slug}>
@@ -53,7 +55,7 @@ export function Footer() {
 
           <div>
             <nav aria-label="푸터 페이지 메뉴">
-              <h2 className="text-sm font-bold tracking-wide text-ink-muted uppercase">Site</h2>
+              <p className="text-sm font-bold tracking-wide text-ink-muted uppercase">바로가기</p>
               <ul className="mt-4 flex flex-col gap-1">
                 {nav.map((item) => (
                   <li key={item.href}>
@@ -68,9 +70,9 @@ export function Footer() {
               </ul>
             </nav>
 
-            <h2 className="mt-6 text-sm font-bold tracking-wide text-ink-muted uppercase">
+            <p className="mt-6 text-sm font-bold tracking-wide text-ink-muted uppercase">
               사업자 정보
-            </h2>
+            </p>
             <dl className="mt-3 flex flex-col gap-1.5 text-[0.85rem] text-ink-muted">
               <div className="flex gap-1.5">
                 <dt>상호</dt>
@@ -92,18 +94,20 @@ export function Footer() {
           <p className="text-[0.8rem] text-ink-muted">
             © {new Date().getFullYear()} {site.legalName}. All rights reserved.
           </p>
-          <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.85rem]">
-            <li>
-              <Link href="/privacy" className="text-ink-soft hover:text-ink">
-                개인정보처리방침
-              </Link>
-            </li>
-            <li>
-              <Link href="/terms" className="text-ink-soft hover:text-ink">
-                이용약관
-              </Link>
-            </li>
-          </ul>
+          <nav aria-label="약관">
+            <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.85rem]">
+              <li>
+                <Link href="/privacy" className="text-ink-soft hover:text-ink">
+                  개인정보처리방침
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="text-ink-soft hover:text-ink">
+                  이용약관
+                </Link>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </footer>

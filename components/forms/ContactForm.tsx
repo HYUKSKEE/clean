@@ -67,13 +67,20 @@ export function ContactForm() {
   const submitting = status.state === "submitting";
 
   return (
-    <form onSubmit={onSubmit} className="rounded-2xl border border-line bg-white p-6 lg:p-8">
-      <h3 className="text-xl font-bold">견적 문의 남기기</h3>
+    <form
+      onSubmit={onSubmit}
+      className="rounded-2xl border border-line bg-white p-6 lg:p-8"
+      aria-labelledby="contact-form-title"
+    >
+      <h3 id="contact-form-title" className="text-xl font-bold">
+        견적 문의 남기기
+      </h3>
       <p className="mt-2 text-sm leading-relaxed text-ink-soft">
         건물 종류와 청소가 필요한 범위를 알려주시면 영업시간 기준 당일에 연락드립니다.
       </p>
 
-      <div className="mt-6 grid gap-5 sm:grid-cols-2">
+      <fieldset className="mt-6 grid gap-5 border-0 p-0 sm:grid-cols-2">
+        <legend className="sr-only">견적 문의 정보</legend>
         <div>
           <label htmlFor="name" className={labelClass}>
             이름 <span className="text-brand-deep">*</span>
@@ -152,7 +159,7 @@ export function ContactForm() {
             className="w-full rounded-xl border border-line bg-white px-4 py-3 text-[0.95rem] leading-relaxed text-ink placeholder:text-ink-muted/70 focus:border-brand-strong"
           />
         </div>
-      </div>
+      </fieldset>
 
       <div className="mt-5 flex items-start gap-2.5 rounded-xl bg-surface p-4">
         <input

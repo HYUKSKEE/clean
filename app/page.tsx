@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { BeforeAfterSection } from "@/components/sections/BeforeAfterSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
@@ -6,7 +7,17 @@ import { PortfolioGallery } from "@/components/sections/PortfolioGallery";
 import { ServiceArea } from "@/components/sections/ServiceArea";
 import { ServiceGrid } from "@/components/sections/ServiceGrid";
 import { TrustFeatures } from "@/components/sections/TrustFeatures";
-import { faqSchema, jsonLd } from "@/lib/structured-data";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { site } from "@/lib/site";
+import { homePageSchema } from "@/lib/structured-data";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: `${site.name} | 서울 · 경기 · 인천 유리창 · 외벽 청소 전문`,
+  },
+  description: site.description,
+  alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
   return (
@@ -19,8 +30,7 @@ export default function HomePage() {
       <ServiceArea />
       <FAQAccordion />
       <ContactSection />
-
-      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(faqSchema)} />
+      <JsonLd data={homePageSchema} />
     </>
   );
 }

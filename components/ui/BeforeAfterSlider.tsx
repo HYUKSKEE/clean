@@ -9,6 +9,7 @@ type Props = {
   afterImage: string;
   beforeAlt: string;
   afterAlt: string;
+  caption?: string;
   /** 초기 손잡이 위치(%) */
   initial?: number;
 };
@@ -22,13 +23,14 @@ export function BeforeAfterSlider({
   afterImage,
   beforeAlt,
   afterAlt,
+  caption,
   initial = 50,
 }: Props) {
   const [value, setValue] = useState(initial);
   const id = useId();
 
   return (
-    <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-line bg-surface select-none">
+    <figure className="relative m-0 aspect-4/3 w-full overflow-hidden rounded-2xl border border-line bg-surface select-none">
       {/* 청소 후 이미지가 바탕, 청소 전 이미지를 왼쪽에서 잘라 보여줍니다 */}
       <Image
         src={afterImage}
@@ -76,6 +78,7 @@ export function BeforeAfterSlider({
         aria-valuetext={`청소 전 이미지 ${value}% 표시`}
         className="absolute inset-0 size-full cursor-ew-resize appearance-none bg-transparent opacity-0"
       />
-    </div>
+      {caption ? <figcaption className="sr-only">{caption}</figcaption> : null}
+    </figure>
   );
 }

@@ -26,9 +26,10 @@ export function PortfolioGallery() {
     >
       <div className="container-page">
         <SectionHeading
+          id="portfolio-title"
           eyebrow="Portfolio"
-          title={<span id="portfolio-title">수도권 시공 사례</span>}
-          description="서울 · 경기 · 인천에서 진행한 유리창, 외벽, 간판·어닝, 시트지 제거, 정기 관리 작업 기록입니다."
+          title="서울 · 경기 · 인천 시공 사례"
+          description="수도권에서 진행한 유리창 청소, 외벽 고압세척, 간판·어닝 청소, 시트지 제거, 정기 관리 작업 기록입니다. 장소와 서비스 유형을 함께 확인할 수 있습니다."
         />
 
         <div
@@ -65,7 +66,7 @@ export function PortfolioGallery() {
           {items.map((item) => (
             <li key={item.id}>
               <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white">
-                <div className="relative aspect-4/3 bg-surface">
+                <figure className="relative m-0 aspect-4/3 bg-surface">
                   <Image
                     src={item.image}
                     alt={item.imageAlt}
@@ -73,18 +74,21 @@ export function PortfolioGallery() {
                     sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
                     className="object-cover"
                   />
-                </div>
+                  <figcaption className="sr-only">{item.imageAlt}</figcaption>
+                </figure>
                 <div className="flex flex-1 flex-col p-5">
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold text-ink-muted">
+                  <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold text-ink-muted">
                     <span className="inline-flex items-center gap-1">
                       <MapPin className="size-3.5 text-brand-deep" aria-hidden />
                       {item.location}
                     </span>
                     <span className="inline-flex items-center gap-1">
                       <CalendarDays className="size-3.5 text-brand-deep" aria-hidden />
-                      {item.period}
+                      <time dateTime={item.period.replaceAll(".", "-").slice(0, 7)}>
+                        {item.period}
+                      </time>
                     </span>
-                  </div>
+                  </p>
                   <h3 className="mt-2.5 text-base font-bold sm:text-lg">{item.title}</h3>
                   <p className="mt-2 text-[0.9rem] leading-relaxed text-ink-soft">
                     {item.description}

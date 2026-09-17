@@ -2,7 +2,9 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type Props = {
-  /** 섹션 위에 붙는 작은 라벨 */
+  /** 섹션 제목과 랜드마크를 연결할 id – h2/h3 에 붙습니다 */
+  id?: string;
+  /** 섹션 위에 붙는 작은 라벨. 제목이 아니므로 p 로 렌더링합니다. */
   eyebrow?: string;
   title: ReactNode;
   description?: ReactNode;
@@ -13,6 +15,7 @@ type Props = {
 };
 
 export function SectionHeading({
+  id,
   eyebrow,
   title,
   description,
@@ -23,7 +26,7 @@ export function SectionHeading({
   const centered = align === "center";
 
   return (
-    <div
+    <header
       className={cn(
         "flex flex-col gap-3",
         centered ? "items-center text-center" : "items-start text-left",
@@ -31,11 +34,14 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? (
-        <span className="inline-flex items-center gap-2 rounded-full bg-brand-soft px-3.5 py-1.5 text-xs font-bold tracking-wide text-brand-deep uppercase">
+        <p className="inline-flex items-center gap-2 rounded-full bg-brand-soft px-3.5 py-1.5 text-xs font-bold tracking-wide text-brand-deep uppercase">
           {eyebrow}
-        </span>
+        </p>
       ) : null}
-      <Tag className="max-w-3xl text-2xl leading-snug font-extrabold sm:text-3xl lg:text-[2.5rem]">
+      <Tag
+        id={id}
+        className="max-w-3xl text-2xl leading-snug font-extrabold sm:text-3xl lg:text-[2.5rem]"
+      >
         {title}
       </Tag>
       {description ? (
@@ -43,6 +49,6 @@ export function SectionHeading({
           {description}
         </p>
       ) : null}
-    </div>
+    </header>
   );
 }

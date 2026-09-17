@@ -7,9 +7,10 @@ import { Button } from "@/components/ui/Button";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ContactSection } from "@/components/sections/ContactSection";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { getService, services } from "@/lib/services";
 import { site, telHref } from "@/lib/site";
-import { jsonLd, serviceSchema } from "@/lib/structured-data";
+import { serviceSchema } from "@/lib/structured-data";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -24,18 +25,18 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
   if (!service) return { title: "서비스를 찾을 수 없습니다" };
 
-  const title = `${service.title} | ${site.areas.join(" · ")}`;
+  const title = `${service.title} | 서울 · 경기 · 인천`;
 
   return {
     title,
-    description: service.summary,
-    keywords: service.keywords,
+    description: `${site.areas.join(" · ")} ${service.title} 전문. ${service.summary}`,
+    keywords: [...service.keywords, ...site.areas.map((area) => `${area} ${service.title}`)],
     alternates: { canonical: `/services/${service.slug}` },
     openGraph: {
       type: "article",
       locale: "ko_KR",
       title: `${service.title} – ${site.name}`,
-      description: service.summary,
+      description: `${site.areas.join(" · ")} ${service.title} 전문. ${service.summary}`,
       url: `/services/${service.slug}`,
       images: [{ url: service.image, alt: service.imageAlt }],
     },
@@ -57,20 +58,20 @@ export default async function ServiceDetailPage({ params }: Params) {
         <header className="border-b border-line bg-surface/60 py-12 lg:py-16">
           <div className="container-page">
             <nav aria-label="위치 경로" className="text-sm text-ink-muted">
-              <ol className="flex items-center gap-1.5">
-                <li>
+              <ol className="flex flex-wrap items-center gap-x-2">
+                <li className="after:ml-2 after:text-ink-muted after:content-['/']">
                   <Link href="/" className="hover:text-ink">
                     홈
                   </Link>
                 </li>
-                <li aria-hidden>/</li>
-                <li>
+                <li className="after:ml-2 after:text-ink-muted after:content-['/']">
                   <Link href="/#services" className="hover:text-ink">
                     서비스 소개
                   </Link>
                 </li>
-                <li aria-hidden>/</li>
-                <li className="font-semibold text-ink">{service.title}</li>
+                <li aria-current="page" className="font-semibold text-ink">
+                  {service.title}
+                </li>
               </ol>
             </nav>
 
@@ -82,6 +83,9 @@ export default async function ServiceDetailPage({ params }: Params) {
                 </span>
                 <h1 className="mt-4 text-[2rem] leading-tight font-extrabold sm:text-4xl lg:text-[2.75rem]">
                   {service.title}
+                  <span className="mt-3 block text-lg font-semibold text-ink-soft sm:text-xl">
+                    {site.areas.join(" · ")} 출장 시공
+                  </span>
                 </h1>
                 <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
                   {service.summary}
@@ -98,7 +102,7 @@ export default async function ServiceDetailPage({ params }: Params) {
                 </div>
               </div>
 
-              <div className="overflow-hidden rounded-2xl border border-line bg-surface">
+              <figure className="m-0 overflow-hidden rounded-2xl border border-line bg-surface">
                 <Image
                   src={service.image}
                   alt={service.imageAlt}
@@ -108,15 +112,21 @@ export default async function ServiceDetailPage({ params }: Params) {
                   sizes="(min-width: 1024px) 44vw, 100vw"
                   className="h-full w-full object-cover"
                 />
-              </div>
+                <figcaption className="sr-only">{service.imageAlt}</figcaption>
+              </figure>
             </div>
           </div>
         </header>
 
-        <div className="border-b border-line py-16 lg:py-20">
+        <section
+          aria-labelledby="method-title"
+          className="border-b border-line py-16 lg:py-20"
+        >
           <div className="container-page grid gap-10 lg:grid-cols-[1.3fr_1fr]">
             <div>
-              <h2 className="text-2xl font-extrabold sm:text-3xl">시공 방식</h2>
+              <h2 id="method-title" className="text-2xl font-extrabold sm:text-3xl">
+                {service.title} 시공 방식
+              </h2>
               <p className="mt-5 text-[0.975rem] leading-relaxed text-ink-soft sm:text-base">
                 {service.description}
               </p>
@@ -168,13 +178,14 @@ export default async function ServiceDetailPage({ params }: Params) {
               </Button>
             </aside>
           </div>
-        </div>
+        </section>
 
         <section aria-labelledby="related-title" className="border-b border-line py-16 lg:py-20">
           <div className="container-page">
             <SectionHeading
+              id="related-title"
               eyebrow="Other services"
-              title={<span id="related-title">함께 많이 의뢰하는 서비스</span>}
+              title="함께 많이 의뢰하는 서비스"
               align="left"
             />
             <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -198,9 +209,7 @@ export default async function ServiceDetailPage({ params }: Params) {
 
       <ContactSection />
 
-      {schema ? (
-        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(schema)} />
-      ) : null}
+      {schema ? <JsonLd data={schema} /> : null}
     </>
   );
 }

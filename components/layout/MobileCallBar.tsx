@@ -5,7 +5,10 @@ import { site, telHref } from "@/lib/site";
 /** 모바일 전용 하단 고정 CTA – 스크롤 위치와 무관하게 문의 동선을 유지합니다. */
 export function MobileCallBar() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-canvas/95 backdrop-blur-md lg:hidden">
+    <nav
+      aria-label="빠른 문의"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-canvas/95 backdrop-blur-md lg:hidden"
+    >
       <div className="grid grid-cols-2 gap-2 px-3 py-2.5">
         <a
           href={telHref}
@@ -22,6 +25,6 @@ export function MobileCallBar() {
           무료 견적 문의
         </Link>
       </div>
-    </div>
+    </nav>
   );
 }

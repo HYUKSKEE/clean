@@ -28,7 +28,9 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-canvas/90 backdrop-blur-md">
+    <header
+      className="sticky top-0 z-50 border-b border-line bg-canvas/90 backdrop-blur-md"
+    >
       <div className="container-page flex h-16 items-center justify-between gap-4 lg:h-20">
         <Logo />
 

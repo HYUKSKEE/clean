@@ -8,18 +8,20 @@ import { stats } from "@/lib/trust";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden border-b border-line" aria-labelledby="hero-title">
-      {/* 배경 포인트 – 노란색은 넓게 쓰지 않고 은은하게만 */}
+    <section
+      className="relative overflow-hidden border-b border-line"
+      aria-labelledby="hero-title"
+    >
       <div
         aria-hidden
         className="pointer-events-none absolute -top-28 -right-24 size-[26rem] rounded-full bg-brand-soft/70 blur-3xl"
       />
 
       <div className="container-page relative grid gap-12 py-14 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16 lg:py-24">
-        <div>
+        <header>
           <p className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3.5 py-2 text-xs font-bold text-ink-soft sm:text-sm">
             <MapPin className="size-4 text-brand-deep" aria-hidden />
-            {site.areas.join(" · ")} 전 지역 무료 출장 견적
+            {site.areas.join(" · ")} 유리창 · 외벽 청소 무료 출장 견적
           </p>
 
           <h1
@@ -39,25 +41,28 @@ export function HeroSection() {
           </h1>
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
-            유리창 · 외벽 · 간판까지 <strong className="font-bold text-ink">건물 외부 청소</strong>만
-            집중해 온 전문 팀입니다. 건물 상태를 먼저 확인하고, 전문 장비와 친환경 세제로 안전하게
-            시공한 뒤 결과를 사진으로 확인해 드립니다.
+            <strong className="font-bold text-ink">서울 · 경기 · 인천</strong> 전 지역을 직접
+            출장하는{" "}
+            <strong className="font-bold text-ink">유리창 청소 · 외벽 청소 · 간판 청소</strong>{" "}
+            전문 팀입니다. 건물 상태를 먼저 확인하고, 전문 장비와 친환경 세제로 안전하게 시공한 뒤
+            결과를 사진으로 확인해 드립니다.
           </p>
 
-          {/* 첫 화면에서 제공 서비스를 바로 파악할 수 있도록 노출 */}
-          <ul className="mt-7 flex flex-wrap gap-2">
-            {services.map((service) => (
-              <li key={service.slug}>
-                <Link
-                  href={`/services/${service.slug}`}
-                  className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line bg-surface px-3.5 text-[0.85rem] font-semibold text-ink-soft transition-colors hover:border-brand-strong hover:bg-brand-tint hover:text-ink sm:text-sm"
-                >
-                  <service.icon className="size-4 text-brand-deep" aria-hidden />
-                  {service.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <nav aria-label="제공 서비스" className="mt-7">
+            <ul className="flex flex-wrap gap-2">
+              {services.map((service) => (
+                <li key={service.slug}>
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line bg-surface px-3.5 text-[0.85rem] font-semibold text-ink-soft transition-colors hover:border-brand-strong hover:bg-brand-tint hover:text-ink sm:text-sm"
+                  >
+                    <service.icon className="size-4 text-brand-deep" aria-hidden />
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button href="/#contact" size="lg">
@@ -74,13 +79,13 @@ export function HeroSection() {
             <ShieldCheck className="size-4 text-brand-deep" aria-hidden />
             출장비 없음 · 배상책임보험 가입 · {site.hours}
           </p>
-        </div>
+        </header>
 
-        <div className="relative">
+        <figure className="relative m-0">
           <div className="overflow-hidden rounded-2xl border border-line bg-surface">
             <Image
               src="/images/hero-main.svg"
-              alt="삐까번쩍 작업자가 고층 건물 유리창을 스퀴지로 청소하는 모습"
+              alt="서울 고층 건물 유리창을 스퀴지로 청소하는 삐까번쩍 작업 모습"
               width={1000}
               height={800}
               priority
@@ -88,25 +93,24 @@ export function HeroSection() {
               className="h-full w-full object-cover"
             />
           </div>
+          <figcaption className="sr-only">
+            삐까번쩍 유리창 청소 작업 현장. 고층 건물 외부를 전문 장비로 시공합니다.
+          </figcaption>
 
-          {/* 시공 현황 요약 – 실제 수치는 lib/trust.ts 에서 수정 */}
           <dl className="mt-4 grid grid-cols-2 divide-line overflow-hidden rounded-2xl border border-line bg-white sm:grid-cols-4 sm:divide-x">
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="border-b border-line px-3 py-4 text-center last:border-b-0 odd:border-r odd:border-line sm:border-b-0 sm:odd:border-r-0"
+                className="flex flex-col border-b border-line px-3 py-4 text-center last:border-b-0 odd:border-r odd:border-line sm:border-b-0 sm:odd:border-r-0"
               >
-                <dt className="sr-only">{stat.label}</dt>
-                <dd>
-                  <span className="block text-lg font-extrabold sm:text-xl">{stat.value}</span>
-                  <span className="mt-0.5 block text-[0.72rem] text-ink-muted sm:text-xs">
-                    {stat.label}
-                  </span>
-                </dd>
+                <dt className="order-2 mt-0.5 text-[0.72rem] text-ink-muted sm:text-xs">
+                  {stat.label}
+                </dt>
+                <dd className="order-1 text-lg font-extrabold sm:text-xl">{stat.value}</dd>
               </div>
             ))}
           </dl>
-        </div>
+        </figure>
       </div>
     </section>
   );

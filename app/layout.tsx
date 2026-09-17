@@ -4,8 +4,9 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileCallBar } from "@/components/layout/MobileCallBar";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/lib/site";
-import { jsonLd, localBusinessSchema } from "@/lib/structured-data";
+import { localBusinessSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -86,9 +87,8 @@ export default function RootLayout({
         <Footer />
         <MobileCallBar />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={jsonLd(localBusinessSchema)}
+        <JsonLd
+          data={{ "@context": "https://schema.org", ...localBusinessSchema }}
         />
 
         {/* Vercel Analytics – 배포 환경에서만 데이터를 전송합니다. */}
