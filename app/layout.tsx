@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -89,6 +90,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={jsonLd(localBusinessSchema)}
         />
+
+        {/* Vercel Analytics – 배포 환경에서만 데이터를 전송합니다. */}
+        <Analytics />
       </body>
     </html>
   );
