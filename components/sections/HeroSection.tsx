@@ -88,7 +88,7 @@ export function HeroSection() {
                 className="xs:shrink-0 xs:whitespace-nowrap xs:px-5 xs:text-[0.95rem]"
               >
                 <Phone className="size-4" aria-hidden />
-                {site.phone} 전화 상담
+                {site.phone}
               </Button>
             </div>
 

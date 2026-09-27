@@ -31,45 +31,45 @@ export function Header({ logoSrc = "" }: { logoSrc?: string }) {
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="h-[100px] border-b border-white/40 bg-[#ffffffcf] backdrop-blur-sm">
         <div className="container-page flex h-full items-center justify-between gap-4">
-        <Logo src={logoSrc} />
+          <Logo src={logoSrc} />
 
-        <nav aria-label="주요 메뉴" className="hidden lg:block">
-          <ul className="flex items-center gap-1">
-            {nav.map((item) => (
-              <li key={item.label}>
-                <Link
-                  href={item.href}
-                  className="inline-flex min-h-11 items-center rounded-full px-4 text-[0.95rem] font-semibold text-ink-soft transition-colors hover:bg-surface hover:text-ink"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+          <nav aria-label="주요 메뉴" className="hidden lg:block">
+            <ul className="flex items-center gap-1">
+              {nav.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="inline-flex min-h-11 items-center rounded-full px-4 text-[0.95rem] font-semibold text-ink-soft transition-colors hover:bg-surface hover:text-ink"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href={telHref}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full px-3 text-[0.95rem] font-bold text-ink transition-colors hover:text-brand-deep"
+          <div className="hidden items-center gap-3 lg:flex">
+            <a
+              href={telHref}
+              className="inline-flex min-h-11 items-center gap-2 rounded-full px-3 text-[0.95rem] font-bold text-ink transition-colors hover:text-brand-deep"
+            >
+              <Phone className="size-4" aria-hidden />
+              <span className="sr-only">전화 상담 </span>
+              {site.phone}
+            </a>
+            <Button href={primaryCta.href}>{primaryCta.label}</Button>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setOpen((prev) => !prev)}
+            className="grid size-11 place-items-center rounded-xl border border-line bg-[#ffffffcf] text-ink lg:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
           >
-            <Phone className="size-4" aria-hidden />
-            <span className="sr-only">전화 상담 </span>
-            {site.phone}
-          </a>
-          <Button href={primaryCta.href}>{primaryCta.label}</Button>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setOpen((prev) => !prev)}
-          className="grid size-11 place-items-center rounded-xl border border-line bg-[#ffffffcf] text-ink lg:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
-        >
-          {open ? <X className="size-5" aria-hidden /> : <Menu className="size-5" aria-hidden />}
-        </button>
+            {open ? <X className="size-5" aria-hidden /> : <Menu className="size-5" aria-hidden />}
+          </button>
         </div>
       </div>
 
@@ -103,7 +103,7 @@ export function Header({ logoSrc = "" }: { logoSrc?: string }) {
                 className="inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-line bg-white text-base font-bold"
               >
                 <Phone className="size-4" aria-hidden />
-                {site.phone} 전화 상담
+                {site.phone}
               </a>
             </div>
           </nav>
