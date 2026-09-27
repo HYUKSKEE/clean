@@ -51,7 +51,7 @@ export function HeroSection() {
                 유리창 청소 · 외벽 청소 · 간판 청소 · 어닝 청소
               </strong>{" "}
               전문 팀입니다. 건물 상태를 먼저 확인하고, 전문 장비와 친환경 세제로 안전하게 시공한 뒤
-              결과를 사진으로 확인해 드립니다.
+              결과로 보답해드립니다.
             </p>
           </div>
 
@@ -94,7 +94,7 @@ export function HeroSection() {
 
             <p className="mt-4 flex items-center gap-2 text-sm text-ink-muted">
               <ShieldCheck className="size-4 text-brand-deep" aria-hidden />
-              출장비 없음 · 배상책임보험 가입 · {site.hours}
+              출장비 없음 / {site.hours}
             </p>
           </div>
         </header>

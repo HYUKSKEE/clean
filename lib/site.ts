@@ -57,7 +57,7 @@ export const site = {
     "https://ppikka-clean.example.com",
   ),
   phone: firstFilled(process.env.NEXT_PUBLIC_PHONE) || "010-7795-8227",
-  email: firstFilled(process.env.NEXT_PUBLIC_EMAIL) || "hello@ppikka-clean.kr",
+  email: firstFilled(process.env.NEXT_PUBLIC_EMAIL) || "kimxogud8227@naver.com",
   kakaoUrl: firstFilled(process.env.NEXT_PUBLIC_KAKAO_URL),
   address:
     firstFilled(process.env.NEXT_PUBLIC_ADDRESS) ||
@@ -65,7 +65,7 @@ export const site = {
   businessNumber:
     firstFilled(process.env.NEXT_PUBLIC_BUSINESS_NUMBER) || "000-00-00000",
   owner: firstFilled(process.env.NEXT_PUBLIC_OWNER) || "홍길동",
-  hours: "평일 · 주말 08:00 – 20:00 (연중무휴 상담)",
+  hours: "평일 · 주말 24시간 연중무휴 상담",
   areas: ["서울", "경기", "인천"],
   foundingYear: 2014,
 } as const;
@@ -75,7 +75,7 @@ export const telHref = `tel:${site.phone.replace(/[^0-9+]/g, "")}`;
 
 export const nav = [
   { label: "서비스 소개", href: "/#services" },
-  { label: "시공 사례", href: "/#portfolio" },
+  { label: "시공 사례", href: "/#services" },
   { label: "서비스 지역", href: "/#area" },
   { label: "FAQ", href: "/#faq" },
 ] as const;

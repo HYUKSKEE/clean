@@ -26,10 +26,10 @@ export default function HomePage() {
     <>
       <HeroSection />
       <SiteShell>
+        <BeforeAfterSection cases={beforeAfterCases} />
         <TrustFeatures />
         <ServiceGrid />
-        <BeforeAfterSection cases={beforeAfterCases} />
-        <PortfolioGallery />
+        {/* <PortfolioGallery /> */}
         <ServiceArea />
         <FAQAccordion />
         <ContactSection />

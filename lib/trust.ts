@@ -22,7 +22,7 @@ export const trustFeatures: TrustFeature[] = [
   {
     title: "안전 작업",
     description:
-      "안전 교육을 이수한 작업자가 2인 1조로 점검 후 시공하고 배상책임보험에 가입되어 있습니다.",
+      "안전 교육을 이수한 작업자가 안전하게 점검 후 시공합니다.",
     icon: HardHat,
   },
   {

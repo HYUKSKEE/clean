@@ -12,8 +12,8 @@ export function TrustFeatures() {
         <SectionHeading
           id="why-title"
           eyebrow="Why 삐까번쩍"
-          title="서울 · 경기 · 인천 청소를 맡기는 이유"
-          description="유리창과 외벽은 한 번 시공할 때 장비와 안전 기준이 결과를 가릅니다. 전문 장비, 2인 1조 안전 작업, 건물 맞춤 시공, 친환경 세제까지 기준을 정해두고 진행합니다."
+          title="삐까번쩍에게 청소를 맡기는 이유"
+          description="유리창과 외벽은 한 번 시공할 때 장비와 안전 기준이 결과를 가릅니다. 전문 장비, 건물 맞춤 시공, 친환경 세제까지 기준을 정해두고 진행합니다."
         />
 
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
