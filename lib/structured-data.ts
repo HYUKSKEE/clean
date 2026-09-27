@@ -1,7 +1,7 @@
 import { beforeAfterCases } from "./before-after";
 import { faqs } from "./faq";
 import { portfolio } from "./portfolio";
-import { regions } from "./areas";
+import { type ServicePlace, regions, servicePlaceHref } from "./areas";
 import { services } from "./services";
 import { site } from "./site";
 
@@ -175,26 +175,31 @@ export const breadcrumbSchema = (items: Array<{ name: string; href: string }>) =
   })),
 });
 
-export const serviceSchema = (slug: string) => {
+export const serviceSchema = (slug: string, place?: ServicePlace) => {
   const service = services.find((item) => item.slug === slug);
   if (!service) return null;
+
+  const name = place ? `${place.label} ${service.title}` : service.title;
+  const path = place
+    ? servicePlaceHref(service.slug, place.slug)
+    : `/services/${service.slug}`;
 
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Service",
-        "@id": `${site.url}/services/${service.slug}#service`,
-        name: service.title,
+        "@id": `${site.url}${path}#service`,
+        name,
         serviceType: service.title,
         description: service.description,
-        url: `${site.url}/services/${service.slug}`,
+        url: `${site.url}${path}`,
         image: `${site.url}${service.image}`,
         provider: { "@id": businessId },
-        areaServed: site.areas.map((area) => ({
+        areaServed: {
           "@type": "AdministrativeArea",
-          name: area,
-        })),
+          name: place?.label ?? site.areas.join(" · "),
+        },
         audience: {
           "@type": "Audience",
           audienceType: service.targets.join(", "),
@@ -202,8 +207,10 @@ export const serviceSchema = (slug: string) => {
       },
       breadcrumbSchema([
         { name: "홈", href: "/" },
-        { name: "서비스 소개", href: "/#services" },
-        { name: service.title, href: `/services/${service.slug}` },
+        ...(place
+          ? [{ name: "서비스 지역", href: "/#area" }]
+          : [{ name: "서비스 소개", href: "/#services" }]),
+        { name, href: path },
       ]),
     ],
   };

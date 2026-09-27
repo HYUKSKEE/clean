@@ -1,7 +1,8 @@
-import { Check, Clock, Truck } from "lucide-react";
+import { Clock, Truck } from "lucide-react";
+import { AreaPlaceNav } from "@/components/sections/AreaPlaceNav";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { regions } from "@/lib/areas";
+import { services } from "@/lib/services";
 import { site } from "@/lib/site";
 
 export function ServiceArea() {
@@ -15,38 +16,30 @@ export function ServiceArea() {
         <SectionHeading
           id="area-title"
           eyebrow="Service Area"
-          title="서울 · 경기 · 인천 유리창 청소 출장 지역"
-          description="수도권은 출장비 없이 방문 상담이 가능합니다. 지역별 오염 특성에 맞춰 유리창 청소와 외벽 고압세척 방법을 다르게 적용합니다."
+          title="서비스별 서울 · 경기 · 인천 출장 지역"
+          description="유리창 청소, 외벽 청소, 간판 청소 등 서비스마다 서울·경기·인천 전체 구·동으로 출장합니다."
         />
 
-        <ul className="mt-10 grid gap-5 lg:grid-cols-3">
-          {regions.map((region) => (
-            <li key={region.name}>
-              <article className="flex h-full flex-col rounded-2xl border border-line bg-white p-6">
-                <h3 className="flex items-center gap-2 text-xl font-bold">
-                  <span
-                    className="grid size-9 place-items-center rounded-lg bg-brand-soft text-sm font-extrabold text-brand-deep"
-                    aria-hidden
-                  >
-                    {region.name.charAt(0)}
+        <ul className="mt-10 flex flex-col gap-4">
+          {services.map((service, index) => (
+            <li key={service.slug}>
+              <details
+                className="rounded-2xl border border-line bg-white"
+                open={index === 0}
+              >
+                <summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 px-5 py-4 text-lg font-bold [&::-webkit-details-marker]:hidden">
+                  <span className="grid size-9 place-items-center rounded-lg bg-brand-soft">
+                    <service.icon
+                      className="size-4 text-brand-deep"
+                      aria-hidden
+                    />
                   </span>
-                  {region.name} 유리창 · 외벽 청소
-                </h3>
-                <p className="mt-3 text-[0.925rem] leading-relaxed text-ink-soft">
-                  {region.summary}
-                </p>
-                <ul className="mt-5 flex flex-wrap gap-1.5 border-t border-line pt-5">
-                  {region.districts.map((district) => (
-                    <li
-                      key={district}
-                      className="inline-flex items-center gap-1 rounded-full bg-surface px-2.5 py-1 text-xs font-medium text-ink-soft"
-                    >
-                      <Check className="size-3 text-brand-deep" aria-hidden />
-                      {region.name} {district}
-                    </li>
-                  ))}
-                </ul>
-              </article>
+                  {service.title}
+                </summary>
+                <div className="border-t border-line px-5 py-5">
+                  <AreaPlaceNav serviceSlug={service.slug} />
+                </div>
+              </details>
             </li>
           ))}
         </ul>

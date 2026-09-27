@@ -1,10 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { servicePlaceHref } from "@/lib/areas";
 import type { Service } from "@/lib/services";
 
-export function ServiceCard({ service }: { service: Service }) {
-  const href = `/services/${service.slug}`;
+export function ServiceCard({
+  service,
+  placeSlug,
+}: {
+  service: Service;
+  placeSlug?: string;
+}) {
+  const href = placeSlug
+    ? servicePlaceHref(service.slug, placeSlug)
+    : `/services/${service.slug}`;
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white transition-colors hover:border-brand-strong">
