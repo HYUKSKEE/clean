@@ -20,7 +20,7 @@ export function HeroSection() {
         <HeroSlideshow slides={slides} backgroundSrc={backgroundSrc} />
       </div>
 
-      <div className="container-page relative z-10 pb-10 lg:pb-12">
+      <div className="container-page relative z-10 p-10 lg:pb-12">
         <header className="flex flex-col gap-8 rounded-2xl border border-line bg-[#ffffffcf] p-6 shadow-[0_8px_32px_rgba(17,24,39,0.08)] lg:flex-row lg:items-center lg:gap-12 lg:p-9">
           <div className="min-w-0 flex-1">
             <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-2 text-xs font-bold text-ink-soft sm:text-sm">
