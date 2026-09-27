@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -98,6 +99,14 @@ export default function RootLayout({
         <JsonLd
           data={{ "@context": "https://schema.org", ...localBusinessSchema }}
         />
+
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`(function(c,l,a,r,i,t,y){
+c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "youmi7kbib");`}
+        </Script>
 
         {/* Vercel Analytics – 배포 환경에서만 데이터를 전송합니다. */}
         <Analytics />
