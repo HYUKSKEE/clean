@@ -15,6 +15,14 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/favicon.ico",
+        destination: "/images/og.svg",
+      },
+    ];
+  },
   images: {
     // 실제 사진을 외부 스토리지(S3, Cloudinary 등)로 옮길 때 여기에 호스트를 추가합니다.
     remotePatterns: [],

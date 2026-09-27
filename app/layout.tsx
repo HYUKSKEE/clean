@@ -30,6 +30,11 @@ export const metadata: Metadata = {
   ],
   applicationName: site.name,
   authors: [{ name: site.legalName }],
+  icons: {
+    icon: [{ url: "/images/og.svg", type: "image/svg+xml" }],
+    shortcut: "/images/og.svg",
+    apple: "/images/og.svg",
+  },
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

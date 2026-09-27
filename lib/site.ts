@@ -75,7 +75,7 @@ export const telHref = `tel:${site.phone.replace(/[^0-9+]/g, "")}`;
 
 export const nav = [
   { label: "서비스 소개", href: "/#services" },
-  { label: "시공 사례", href: "/#services" },
+  { label: "시공 사례", href: "/#before-after" },
   { label: "서비스 지역", href: "/#area" },
   { label: "FAQ", href: "/#faq" },
 ] as const;

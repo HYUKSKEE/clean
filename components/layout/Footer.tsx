@@ -58,7 +58,7 @@ export function Footer({ logoSrc = "" }: { logoSrc?: string }) {
               <p className="text-sm font-bold tracking-wide text-ink-muted uppercase">바로가기</p>
               <ul className="mt-4 flex flex-col gap-1">
                 {nav.map((item) => (
-                  <li key={item.href}>
+                  <li key={item.label}>
                     <Link
                       href={item.href}
                       className="inline-flex min-h-10 items-center text-[0.925rem] text-ink-soft hover:text-ink"

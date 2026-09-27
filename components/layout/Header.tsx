@@ -36,7 +36,7 @@ export function Header({ logoSrc = "" }: { logoSrc?: string }) {
         <nav aria-label="주요 메뉴" className="hidden lg:block">
           <ul className="flex items-center gap-1">
             {nav.map((item) => (
-              <li key={item.href}>
+              <li key={item.label}>
                 <Link
                   href={item.href}
                   className="inline-flex min-h-11 items-center rounded-full px-4 text-[0.95rem] font-semibold text-ink-soft transition-colors hover:bg-surface hover:text-ink"
@@ -81,7 +81,7 @@ export function Header({ logoSrc = "" }: { logoSrc?: string }) {
           <nav aria-label="모바일 주요 메뉴" className="container-page py-4">
             <ul className="flex flex-col">
               {nav.map((item) => (
-                <li key={item.href} className="border-b border-line/70 last:border-none">
+                <li key={item.label} className="border-b border-line/70 last:border-none">
                   <Link
                     href={item.href}
                     onClick={() => setOpen(false)}
