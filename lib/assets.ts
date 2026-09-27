@@ -3,6 +3,7 @@
  *
  *   public/assets/logo/logo.svg          로고 · 심볼
  *   public/assets/hero/01.png            메인 배경 슬라이드 (숫자 인덱스가 순서)
+ *   public/assets/hero/mob_01.png        모바일 슬라이드 (prefix: mob_ , 01~04)
  *   public/assets/hero/background.*      슬라이드 뒤 커버 배경 (슬라이드에 포함하지 않음)
  *   public/assets/before-after/<슬러그>/ 전후 비교
  *
@@ -12,12 +13,15 @@
 
 export const logoAssetRoot = "/assets/logo";
 export const heroAssetRoot = "/assets/hero";
+export const heroMobilePrefix = "mob_";
 export const beforeAfterAssetRoot = "/assets/before-after";
 
 export type HeroSlide = {
   src: string;
+  /** `mob_01`처럼 prefix 가 있으면 md 미만에서 이 사진을 씁니다. */
+  mobileSrc?: string;
   alt: string;
-  /** 파일명 앞 숫자. 01.png → 1 */
+  /** 파일명 앞 숫자. 01.png → 1, mob_01.png → 1 */
   index: number;
 };
 

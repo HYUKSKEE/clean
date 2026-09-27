@@ -206,9 +206,9 @@ const logoMark = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" wi
 await mkdir(LOGO_OUT, { recursive: true });
 const hasLogoPhoto = existsSync(LOGO_OUT)
   ? readdirSync(LOGO_OUT).some((name) => {
-      const { name: fileName, ext } = parse(name);
-      return fileName.toLowerCase() === "logo" && ext.length > 1 && ext.toLowerCase() !== ".svg";
-    })
+    const { name: fileName, ext } = parse(name);
+    return fileName.toLowerCase() === "logo" && ext.length > 1 && ext.toLowerCase() !== ".svg";
+  })
   : false;
 
 if (!hasLogoPhoto) {
@@ -226,9 +226,9 @@ const heroSlides = [
 await mkdir(HERO_OUT, { recursive: true });
 const heroHasPhoto = existsSync(HERO_OUT)
   ? readdirSync(HERO_OUT).some((name) => {
-      const { ext } = parse(name);
-      return ext.length > 1 && ext.toLowerCase() !== ".svg";
-    })
+    const { ext } = parse(name);
+    return ext.length > 1 && ext.toLowerCase() !== ".svg";
+  })
   : false;
 
 if (!heroHasPhoto) {

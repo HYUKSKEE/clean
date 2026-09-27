@@ -1,6 +1,11 @@
 import { existsSync, readdirSync } from "node:fs";
 import { join, parse } from "node:path";
-import { heroAssetRoot, logoAssetRoot, type HeroSlide } from "./assets";
+import {
+  heroAssetRoot,
+  heroMobilePrefix,
+  logoAssetRoot,
+  type HeroSlide,
+} from "./assets";
 
 const imageExts = new Set([
   ".jpg",
@@ -43,9 +48,31 @@ export const getLogoSrc = () => {
   );
 };
 
-const heroIndex = (filename: string) => {
-  const match = parse(filename).name.match(/^(\d+)/);
+const heroIndex = (filename: string, prefix = "") => {
+  const escaped = prefix.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = parse(filename).name.match(
+    new RegExp(`^${escaped}(\\d+)$`, "i"),
+  );
   return match ? Number(match[1]) : null;
+};
+
+const collectHeroFiles = (names: string[], prefix = "") => {
+  const files = names.flatMap((name) => {
+    const ext = parse(name).ext.toLowerCase();
+    const index = heroIndex(name, prefix);
+    if (!ext || !imageExts.has(ext) || index === null) return [];
+    return [{ name, index, isSvg: ext === ".svg" }];
+  });
+
+  const photos = files.filter((file) => !file.isSvg);
+  const pool = photos.length > 0 ? photos : files;
+  const byIndex = new Map<number, (typeof pool)[number]>();
+
+  for (const file of pool.sort((a, b) => a.index - b.index || a.name.localeCompare(b.name))) {
+    if (!byIndex.has(file.index)) byIndex.set(file.index, file);
+  }
+
+  return byIndex;
 };
 
 /** public/assets/hero/background.* — 슬라이드가 아닌 뒤 배경. */
@@ -69,24 +96,33 @@ export const getHeroSlides = (): HeroSlide[] => {
   const dir = publicDir("assets", "hero");
   if (!existsSync(dir)) return [];
 
-  const files = readdirSync(dir).flatMap((name) => {
-    const ext = parse(name).ext.toLowerCase();
-    const index = heroIndex(name);
-    if (!ext || !imageExts.has(ext) || index === null) return [];
-    return [{ name, index, isSvg: ext === ".svg" }];
+  const names = readdirSync(dir);
+  const desktop = collectHeroFiles(names);
+  const mobile = collectHeroFiles(names, heroMobilePrefix);
+  const indices = [...new Set([...desktop.keys(), ...mobile.keys()])].sort((a, b) => a - b);
+
+  return indices.flatMap((index) => {
+    const desktopFile = desktop.get(index);
+    const mobileFile = mobile.get(index);
+    const src = desktopFile
+      ? `${heroAssetRoot}/${desktopFile.name}`
+      : mobileFile
+        ? `${heroAssetRoot}/${mobileFile.name}`
+        : "";
+    if (!src) return [];
+
+    const mobileSrc =
+      mobileFile && `${heroAssetRoot}/${mobileFile.name}` !== src
+        ? `${heroAssetRoot}/${mobileFile.name}`
+        : undefined;
+
+    return [
+      {
+        src,
+        mobileSrc,
+        index,
+        alt: `삐까번쩍 청소 현장 사진 ${index}`,
+      },
+    ];
   });
-
-  const photos = files.filter((file) => !file.isSvg);
-  const pool = photos.length > 0 ? photos : files;
-  const byIndex = new Map<number, (typeof pool)[number]>();
-
-  for (const file of pool.sort((a, b) => a.index - b.index || a.name.localeCompare(b.name))) {
-    if (!byIndex.has(file.index)) byIndex.set(file.index, file);
-  }
-
-  return [...byIndex.values()].map((file) => ({
-    src: `${heroAssetRoot}/${file.name}`,
-    index: file.index,
-    alt: `삐까번쩍 청소 현장 사진 ${file.index}`,
-  }));
 };
