@@ -21,13 +21,22 @@
     system-ui, sans-serif;
 
   --radius-card: 1rem;
+
+  /* 420px 이하는 기존 모바일 스타일, 그 위부터 데스크톱 히어로 */
+  --breakpoint-xs: 421px;
 }
 
 @layer base {
+  :root {
+    --site-max: 1080px;
+  }
+
   html {
+    font-size: 18px;
     scroll-behavior: smooth;
-    /* sticky 헤더에 가리지 않도록 앵커 이동 시 여백 확보 */
-    scroll-padding-top: 5.5rem;
+    /* 고정 헤더(100px)에 가리지 않도록 앵커 이동 시 여백 확보 */
+    scroll-padding-top: 100px;
+    background-color: var(--color-canvas);
   }
 
   body {
@@ -63,12 +72,19 @@
 }
 
 @layer components {
-  /* 섹션 공통 좌우 여백 */
+  /* 헤더·푸터·히어로 안쪽 정렬 */
   .container-page {
     width: 100%;
-    max-width: 76rem;
+    max-width: var(--site-max);
     margin-inline: auto;
     padding-inline: 1.25rem;
+  }
+
+  /* 본문 컬럼 – 헤더·히어로·푸터의 형제로 두어 1080px에서 멈춥니다 */
+  .site-shell {
+    width: 100%;
+    max-width: var(--site-max);
+    margin-inline: auto;
   }
 
   @media (min-width: 1024px) {

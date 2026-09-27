@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileCallBar } from "@/components/layout/MobileCallBar";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { getLogoSrc } from "@/lib/public-assets";
 import { site } from "@/lib/site";
 import { localBusinessSchema } from "@/lib/structured-data";
 
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     "간판 청소",
     "어닝 청소",
     "시트지 제거",
-    "건물 정기 관리",
+    "특수 청소",
     "서울 유리창 청소",
     "경기 외벽 청소",
     "인천 유리창 청소",
@@ -67,6 +68,8 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const logoSrc = getLogoSrc();
+
   return (
     <html lang="ko">
       {/* 모바일 하단 고정 CTA 바(약 68px) 높이만큼 아래 여백을 확보해 푸터가 가려지지 않게 합니다. */}
@@ -78,13 +81,13 @@ export default function RootLayout({
           본문으로 바로 이동
         </a>
 
-        <Header />
+        <Header logoSrc={logoSrc} />
 
-        <main id="main" className="flex-1">
+        <main id="main" className="flex-1 pt-[100px]">
           {children}
         </main>
 
-        <Footer />
+        <Footer logoSrc={logoSrc} />
         <MobileCallBar />
 
         <JsonLd

@@ -29,7 +29,7 @@ export function PortfolioGallery() {
           id="portfolio-title"
           eyebrow="Portfolio"
           title="서울 · 경기 · 인천 시공 사례"
-          description="수도권에서 진행한 유리창 청소, 외벽 고압세척, 간판·어닝 청소, 시트지 제거, 정기 관리 작업 기록입니다. 장소와 서비스 유형을 함께 확인할 수 있습니다."
+          description="수도권에서 진행한 유리창 청소, 외벽 고압세척, 간판 청소, 어닝 청소, 시트지 제거, 특수 청소 작업 기록입니다. 장소와 서비스 유형을 함께 확인할 수 있습니다."
         />
 
         <div

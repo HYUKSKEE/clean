@@ -43,7 +43,7 @@ export const site = {
   legalName: firstFilled(process.env.NEXT_PUBLIC_LEGAL_NAME) || "삐까번쩍 클린서비스",
   tagline: "유리창 · 외벽 청소 전문",
   description:
-    "서울 · 경기 · 인천 유리창 청소, 외벽 고압세척, 간판·어닝 청소, 시트지 제거, 정기 관리 전문 업체. 전문 장비와 친환경 세제로 안전하게 시공하고 무료 견적을 안내합니다.",
+    "서울 · 경기 · 인천 유리창 청소, 외벽 고압세척, 간판 청소, 어닝 청소, 시트지 제거, 특수 청소 전문 업체. 전문 장비와 친환경 세제로 안전하게 시공하고 무료 견적을 안내합니다.",
   /**
    * 우선순위: 직접 지정한 도메인 → Vercel 프로덕션 도메인 → Vercel 배포별 도메인 → 기본값.
    * 덕분에 NEXT_PUBLIC_SITE_URL 을 설정하지 않아도 Vercel 에서 정상 빌드됩니다.
@@ -56,7 +56,7 @@ export const site = {
     ),
     "https://ppikka-clean.example.com",
   ),
-  phone: firstFilled(process.env.NEXT_PUBLIC_PHONE) || "010-0000-0000",
+  phone: firstFilled(process.env.NEXT_PUBLIC_PHONE) || "010-7795-8227",
   email: firstFilled(process.env.NEXT_PUBLIC_EMAIL) || "hello@ppikka-clean.kr",
   kakaoUrl: firstFilled(process.env.NEXT_PUBLIC_KAKAO_URL),
   address:

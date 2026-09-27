@@ -4,15 +4,15 @@ import { Logo } from "@/components/layout/Logo";
 import { services } from "@/lib/services";
 import { nav, site, telHref } from "@/lib/site";
 
-export function Footer() {
+export function Footer({ logoSrc = "" }: { logoSrc?: string }) {
   return (
     <footer className="border-t border-line bg-white">
       <div className="container-page py-14 lg:py-16">
         <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr_1fr]">
           <div>
-            <Logo withTagline={false} />
+            <Logo src={logoSrc} withTagline={false} />
             <p className="mt-4 max-w-sm text-[0.925rem] leading-relaxed text-ink-soft">
-              {site.areas.join(" · ")} 유리창 · 외벽 · 간판 청소 전문. 전문 장비와 친환경 세제로
+              {site.areas.join(" · ")} 유리창 · 외벽 · 간판 · 어닝 청소 전문. 전문 장비와 친환경 세제로
               안전하게 시공합니다.
             </p>
             <address className="mt-5 not-italic">

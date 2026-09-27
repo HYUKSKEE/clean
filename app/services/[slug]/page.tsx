@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, Phone } from "lucide-react";
+import { SiteShell } from "@/components/layout/SiteShell";
 import { Button } from "@/components/ui/Button";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -54,6 +55,7 @@ export default async function ServiceDetailPage({ params }: Params) {
 
   return (
     <>
+      <SiteShell>
       <article>
         <header className="border-b border-line bg-surface/60 py-12 lg:py-16">
           <div className="container-page">
@@ -208,6 +210,7 @@ export default async function ServiceDetailPage({ params }: Params) {
       </article>
 
       <ContactSection />
+      </SiteShell>
 
       {schema ? <JsonLd data={schema} /> : null}
     </>

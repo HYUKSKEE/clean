@@ -3,15 +3,22 @@
  *
  *   npm run images
  *
- * 실제 시공 사진을 받으면 public/images 아래 같은 경로·같은 파일명으로
- * 덮어쓰거나, lib/*.ts 의 image 값을 새 파일명으로 바꾸면 됩니다.
- * (JPG/PNG로 교체할 경우 확장자까지 함께 수정하세요.)
+ * 실제 시공 사진을 받으면
+ *   - 로고: public/assets/logo/logo.png (또는 logo.svg)
+ *   - 메인 배경: public/assets/hero/01.jpg, 02.jpg, …
+ *   - 전후 비교: public/assets/before-after/<서비스-슬러그>/before.jpg, after.jpg
+ *     jpg · webp · png 가 있으면 그걸 쓰고, 생성 스크립트도 덮어쓰지 않습니다.
+ *   - 그 외: public/images 아래 같은 경로·같은 파일명으로 덮어씁니다.
  */
 
+import { existsSync, readdirSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
+import { dirname, join, parse } from "node:path";
 
 const OUT = join(process.cwd(), "public", "images");
+const LOGO_OUT = join(process.cwd(), "public", "assets", "logo");
+const HERO_OUT = join(process.cwd(), "public", "assets", "hero");
+const BEFORE_AFTER_OUT = join(process.cwd(), "public", "assets", "before-after");
 
 const BRAND = "#facc15";
 const INK = "#111827";
@@ -160,23 +167,13 @@ ${captionSvg}
 };
 
 const files = [
-  // Hero
-  ["hero-main.svg", facade({ seed: "hero", w: 1000, h: 800, accent: "squeegee" })],
-
   // 서비스 카드
   ["services/window-cleaning.svg", facade({ seed: "svc-window", accent: "squeegee", caption: "유리창 청소" })],
   ["services/exterior-wall.svg", facade({ seed: "svc-wall", accent: "spray", caption: "외벽 고압세척" })],
-  ["services/signage-awning.svg", facade({ seed: "svc-sign", accent: "sign", caption: "간판 · 어닝 청소" })],
+  ["services/signage.svg", facade({ seed: "svc-sign", accent: "sign", caption: "간판 청소" })],
+  ["services/awning.svg", facade({ seed: "svc-awning", accent: "sign", caption: "어닝 청소" })],
   ["services/film-removal.svg", facade({ seed: "svc-film", accent: "squeegee", caption: "시트지 제거" })],
-  ["services/maintenance.svg", facade({ seed: "svc-maint", accent: "spray", caption: "정기 관리" })],
-
-  // Before & After – 칩은 슬라이더 컴포넌트가 좌/우에 올립니다.
-  ["before-after/glass-before.svg", facade({ seed: "ba-glass", w: 1000, h: 750, state: "dirty" })],
-  ["before-after/glass-after.svg", facade({ seed: "ba-glass", w: 1000, h: 750, accent: "squeegee" })],
-  ["before-after/wall-before.svg", facade({ seed: "ba-wall", w: 1000, h: 750, state: "dirty" })],
-  ["before-after/wall-after.svg", facade({ seed: "ba-wall", w: 1000, h: 750, accent: "spray" })],
-  ["before-after/sign-before.svg", facade({ seed: "ba-sign", w: 1000, h: 750, state: "dirty", accent: "sign" })],
-  ["before-after/sign-after.svg", facade({ seed: "ba-sign", w: 1000, h: 750, accent: "sign" })],
+  ["services/specialized-cleaning.svg", facade({ seed: "svc-special", accent: "spray", caption: "특수 청소" })],
 
   // 시공 사례
   ["portfolio/seoul-office-glass.svg", facade({ seed: "p1", accent: "squeegee" })],
@@ -187,7 +184,7 @@ const files = [
   ["portfolio/seoul-awning.svg", facade({ seed: "p6", accent: "sign" })],
   ["portfolio/incheon-film-removal.svg", facade({ seed: "p7", accent: "squeegee" })],
   ["portfolio/seoul-showroom-film.svg", facade({ seed: "p8", accent: "squeegee" })],
-  ["portfolio/gyeonggi-maintenance.svg", facade({ seed: "p9", accent: "spray" })],
+  ["portfolio/gyeonggi-skylight.svg", facade({ seed: "p10", accent: "spray" })],
 
   // Open Graph
   ["og.svg", facade({ seed: "og", w: 1200, h: 630, accent: "squeegee", caption: "삐까번쩍 · 서울 경기 인천 유리창 · 외벽 청소" })],
@@ -200,6 +197,100 @@ for (const [name, content] of files) {
 }
 
 console.log(`✓ ${files.length}개의 플레이스홀더 이미지를 public/images 에 생성했습니다.`);
+
+const logoMark = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80" role="img">
+<rect width="80" height="80" rx="18" fill="${BRAND}"/>
+<path d="M40 16l4.8 14.8H60l-12.4 9 4.8 14.7L40 45.6 27.6 54.5l4.8-14.7-12.4-9h15.2z" fill="${INK}"/>
+</svg>`;
+
+await mkdir(LOGO_OUT, { recursive: true });
+const hasLogoPhoto = existsSync(LOGO_OUT)
+  ? readdirSync(LOGO_OUT).some((name) => {
+      const { name: fileName, ext } = parse(name);
+      return fileName.toLowerCase() === "logo" && ext.length > 1 && ext.toLowerCase() !== ".svg";
+    })
+  : false;
+
+if (!hasLogoPhoto) {
+  await writeFile(join(LOGO_OUT, "logo.svg"), logoMark, "utf8");
+}
+
+console.log("✓ 로고 플레이스홀더를 public/assets/logo 에 생성했습니다.");
+
+const heroSlides = [
+  ["01.svg", facade({ seed: "hero-1", w: 1600, h: 1000, accent: "squeegee" })],
+  ["02.svg", facade({ seed: "hero-2", w: 1600, h: 1000, accent: "spray" })],
+  ["03.svg", facade({ seed: "hero-3", w: 1600, h: 1000, accent: "sign" })],
+];
+
+await mkdir(HERO_OUT, { recursive: true });
+const heroHasPhoto = existsSync(HERO_OUT)
+  ? readdirSync(HERO_OUT).some((name) => {
+      const { ext } = parse(name);
+      return ext.length > 1 && ext.toLowerCase() !== ".svg";
+    })
+  : false;
+
+if (!heroHasPhoto) {
+  for (const [name, content] of heroSlides) {
+    await writeFile(join(HERO_OUT, name), content, "utf8");
+  }
+}
+
+console.log("✓ 메인 배경 슬라이드를 public/assets/hero 에 생성했습니다.");
+
+const beforeAfterFiles = [
+  ["window-cleaning", "ba-glass", "squeegee"],
+  ["exterior-wall", "ba-wall", "spray"],
+  ["signage", "ba-sign", "sign"],
+  ["awning", "ba-awning", "sign"],
+  ["film-removal", "ba-film", "squeegee"],
+  ["specialized-cleaning", "ba-special", "spray"],
+];
+
+const hasPhoto = (dir, side) => {
+  if (!existsSync(dir)) return false;
+
+  return readdirSync(dir).some((name) => {
+    const { name: fileName, ext } = parse(name);
+    return (
+      fileName.toLowerCase() === side &&
+      ext.length > 1 &&
+      ext.toLowerCase() !== ".svg"
+    );
+  });
+};
+
+for (const [slug, seed, accent] of beforeAfterFiles) {
+  const dir = join(BEFORE_AFTER_OUT, slug);
+  await mkdir(dir, { recursive: true });
+
+  if (!hasPhoto(dir, "before")) {
+    await writeFile(
+      join(dir, "before.svg"),
+      facade({
+        seed,
+        w: 1000,
+        h: 750,
+        state: "dirty",
+        accent: accent === "sign" ? "sign" : undefined,
+      }),
+      "utf8",
+    );
+  }
+
+  if (!hasPhoto(dir, "after")) {
+    await writeFile(
+      join(dir, "after.svg"),
+      facade({ seed, w: 1000, h: 750, accent }),
+      "utf8",
+    );
+  }
+}
+
+console.log(
+  `✓ ${beforeAfterFiles.length}개 서비스의 전후 이미지를 public/assets/before-after 에 생성했습니다.`,
+);
 
 /**
  * Open Graph 이미지는 SVG를 읽지 못하는 크롤러가 많아 PNG로도 변환합니다.

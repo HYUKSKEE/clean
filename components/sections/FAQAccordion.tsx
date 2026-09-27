@@ -20,7 +20,7 @@ export function FAQAccordion() {
           id="faq-title"
           eyebrow="FAQ"
           title="유리창 청소 자주 묻는 질문"
-          description="서울 · 경기 · 인천 출장 청소 비용, 작업 시간, 정기 관리, 견적 문의 방법을 모았습니다. 답변은 페이지에 그대로 공개되어 있습니다."
+          description="서울 · 경기 · 인천 출장 청소 비용, 작업 시간, 특수 청소, 견적 문의 방법을 모았습니다. 답변은 페이지에 그대로 공개되어 있습니다."
         />
 
         <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border border-line bg-white">

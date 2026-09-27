@@ -14,8 +14,8 @@ export function ServiceGrid() {
         <SectionHeading
           id="services-title"
           eyebrow="Services"
-          title="유리창 · 외벽 · 간판 청소 서비스"
-          description="아파트 유리창 청소부터 빌딩 외벽 고압세척, 간판·어닝 청소, 시트지 제거, 정기 관리까지. 현장을 먼저 확인하고 필요한 작업만 제안합니다."
+          title="유리창 · 외벽 · 간판 · 어닝 청소 서비스"
+          description="아파트 유리창 청소부터 빌딩 외벽 고압세척, 간판 청소, 어닝 청소, 시트지 제거, 특수 청소까지. 현장을 먼저 확인하고 필요한 작업만 제안합니다."
         />
 
         <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

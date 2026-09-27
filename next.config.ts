@@ -1,6 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/services/signage-awning",
+        destination: "/services/signage",
+        permanent: true,
+      },
+      {
+        source: "/services/maintenance",
+        destination: "/#services",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     // 실제 사진을 외부 스토리지(S3, Cloudinary 등)로 옮길 때 여기에 호스트를 추가합니다.
     remotePatterns: [],

@@ -19,7 +19,7 @@ export default function TermsPage() {
         {
           heading: "제1조 (목적)",
           body: [
-            `본 약관은 ${site.legalName}(이하 "회사")가 제공하는 유리창·외벽·간판 청소 및 정기 관리 서비스의 이용 조건과 절차를 정합니다.`,
+            `본 약관은 ${site.legalName}(이하 "회사")가 제공하는 유리창·외벽·간판·어닝·특수 청소 서비스의 이용 조건과 절차를 정합니다.`,
           ],
         },
         {

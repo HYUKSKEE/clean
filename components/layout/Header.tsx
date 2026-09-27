@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/layout/Logo";
 import { nav, primaryCta, site, telHref } from "@/lib/site";
 
-export function Header() {
+export function Header({ logoSrc = "" }: { logoSrc?: string }) {
   const [open, setOpen] = useState(false);
 
   // 메뉴가 열려 있는 동안 배경 스크롤을 막고, ESC 로 닫습니다.
@@ -28,11 +28,10 @@ export function Header() {
   }, [open]);
 
   return (
-    <header
-      className="sticky top-0 z-50 border-b border-line bg-canvas/90 backdrop-blur-md"
-    >
-      <div className="container-page flex h-16 items-center justify-between gap-4 lg:h-20">
-        <Logo />
+    <header className="fixed inset-x-0 top-0 z-50">
+      <div className="h-[100px] border-b border-white/40 bg-[#ffffffcf] backdrop-blur-sm">
+        <div className="container-page flex h-full items-center justify-between gap-4">
+        <Logo src={logoSrc} />
 
         <nav aria-label="주요 메뉴" className="hidden lg:block">
           <ul className="flex items-center gap-1">
@@ -64,19 +63,20 @@ export function Header() {
         <button
           type="button"
           onClick={() => setOpen((prev) => !prev)}
-          className="grid size-11 place-items-center rounded-xl border border-line bg-white text-ink lg:hidden"
+          className="grid size-11 place-items-center rounded-xl border border-line bg-[#ffffffcf] text-ink lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
         >
           {open ? <X className="size-5" aria-hidden /> : <Menu className="size-5" aria-hidden />}
         </button>
+        </div>
       </div>
 
       {open ? (
         <div
           id="mobile-menu"
-          className="border-t border-line bg-canvas lg:hidden"
+          className="border-t border-white/40 bg-[#ffffffcf] lg:hidden"
         >
           <nav aria-label="모바일 주요 메뉴" className="container-page py-4">
             <ul className="flex flex-col">

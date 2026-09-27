@@ -22,7 +22,7 @@ export function ContactSection() {
           id="contact-title"
           eyebrow="Contact"
           title="서울 · 경기 · 인천 무료 견적 문의"
-          description="유리창 청소, 외벽 청소, 간판·어닝 청소 상담과 출장 견적은 모두 무료입니다. 전화가 편하시면 바로 연락 주세요."
+          description="유리창 청소, 외벽 청소, 간판 청소, 어닝 청소, 특수 청소 상담과 출장 견적은 모두 무료입니다. 전화가 편하시면 바로 연락 주세요."
         />
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.15fr] lg:gap-8">

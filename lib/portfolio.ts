@@ -60,18 +60,18 @@ export const portfolio: PortfolioItem[] = [
   },
   {
     id: "gyeonggi-sign-clean",
-    serviceSlug: "signage-awning",
-    title: "프랜차이즈 매장 간판 · 어닝 세척",
+    serviceSlug: "signage",
+    title: "프랜차이즈 매장 간판 세척",
     location: "경기 성남시",
     description:
-      "채널 간판 내부 먼지와 어닝 곰팡이를 제거했습니다. 세척 후 LED 밝기가 눈에 띄게 회복됐습니다.",
+      "채널 간판 내부 먼지를 제거했습니다. 세척 후 LED 밝기가 눈에 띄게 회복됐습니다.",
     period: "2025.06",
     image: "/images/portfolio/gyeonggi-sign-clean.svg",
-    imageAlt: "경기 성남시 프랜차이즈 매장 간판과 어닝 청소 시공 사진",
+    imageAlt: "경기 성남시 프랜차이즈 매장 간판 청소 시공 사진",
   },
   {
     id: "seoul-awning",
-    serviceSlug: "signage-awning",
+    serviceSlug: "awning",
     title: "카페 거리 어닝 일괄 청소",
     location: "서울 마포구",
     description:
@@ -103,15 +103,15 @@ export const portfolio: PortfolioItem[] = [
     imageAlt: "서울 강남구 쇼룸 유리 단열필름 제거 시공 사진",
   },
   {
-    id: "gyeonggi-maintenance",
-    serviceSlug: "maintenance",
-    title: "오피스 빌딩 분기 정기 관리",
-    location: "경기 안양시",
+    id: "gyeonggi-skylight",
+    serviceSlug: "specialized-cleaning",
+    title: "주택 채광창 녹조 · 물때 세척",
+    location: "경기 용인시",
     description:
-      "분기마다 방문해 공용부 유리와 출입구 캐노피를 관리합니다. 방문 리포트를 관리사무소에 전달합니다.",
-    period: "2024.09 ~ 진행 중",
-    image: "/images/portfolio/gyeonggi-maintenance.svg",
-    imageAlt: "경기 안양시 오피스 빌딩 정기 관리 시공 사진",
+      "천장 채광창에 번진 녹조와 물때를 특수 세정으로 제거했습니다. 유리면 시야가 회복됐습니다.",
+    period: "2025.07",
+    image: "/images/portfolio/gyeonggi-skylight.svg",
+    imageAlt: "경기 용인시 주택 채광창 특수 청소 시공 사진",
   },
 ];
 

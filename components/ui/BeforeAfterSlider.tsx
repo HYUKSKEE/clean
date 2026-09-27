@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import Image from "next/image";
 import { MoveHorizontal } from "lucide-react";
+import { isNextOptimizedImage } from "@/lib/assets";
 
 type Props = {
   beforeImage: string;
@@ -37,6 +38,7 @@ export function BeforeAfterSlider({
         alt={afterAlt}
         fill
         sizes="(min-width: 1024px) 60vw, 100vw"
+        unoptimized={!isNextOptimizedImage(afterImage)}
         className="object-cover"
       />
       <span
@@ -55,6 +57,7 @@ export function BeforeAfterSlider({
           alt={beforeAlt}
           fill
           sizes="(min-width: 1024px) 60vw, 100vw"
+          unoptimized={!isNextOptimizedImage(beforeImage)}
           className="object-cover"
         />
         <span

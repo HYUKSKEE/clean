@@ -4,11 +4,15 @@ import { useState } from "react";
 import { MapPin } from "lucide-react";
 import { BeforeAfterSlider } from "@/components/ui/BeforeAfterSlider";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { beforeAfterCases } from "@/lib/before-after";
+import type { ResolvedBeforeAfterCase } from "@/lib/before-after";
 import { cn } from "@/lib/utils";
 
-export function BeforeAfterSection() {
-  const [activeId, setActiveId] = useState(beforeAfterCases[0].id);
+export function BeforeAfterSection({
+  cases,
+}: {
+  cases: ResolvedBeforeAfterCase[];
+}) {
+  const [activeId, setActiveId] = useState(cases[0]?.id ?? "");
 
   return (
     <section
@@ -29,7 +33,7 @@ export function BeforeAfterSection() {
           aria-label="비교할 시공 유형"
           className="mt-8 flex flex-wrap justify-center gap-2"
         >
-          {beforeAfterCases.map((item) => {
+          {cases.map((item) => {
             const selected = item.id === activeId;
             return (
               <button
@@ -54,7 +58,7 @@ export function BeforeAfterSection() {
           })}
         </div>
 
-        {beforeAfterCases.map((item) => {
+        {cases.map((item) => {
           const selected = item.id === activeId;
 
           return (

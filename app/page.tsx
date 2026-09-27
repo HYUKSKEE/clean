@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SiteShell } from "@/components/layout/SiteShell";
 import { BeforeAfterSection } from "@/components/sections/BeforeAfterSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
@@ -8,6 +9,7 @@ import { ServiceArea } from "@/components/sections/ServiceArea";
 import { ServiceGrid } from "@/components/sections/ServiceGrid";
 import { TrustFeatures } from "@/components/sections/TrustFeatures";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { beforeAfterCases } from "@/lib/before-after";
 import { site } from "@/lib/site";
 import { homePageSchema } from "@/lib/structured-data";
 
@@ -23,13 +25,15 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <TrustFeatures />
-      <ServiceGrid />
-      <BeforeAfterSection />
-      <PortfolioGallery />
-      <ServiceArea />
-      <FAQAccordion />
-      <ContactSection />
+      <SiteShell>
+        <TrustFeatures />
+        <ServiceGrid />
+        <BeforeAfterSection cases={beforeAfterCases} />
+        <PortfolioGallery />
+        <ServiceArea />
+        <FAQAccordion />
+        <ContactSection />
+      </SiteShell>
       <JsonLd data={homePageSchema} />
     </>
   );
