@@ -5,6 +5,7 @@ import { AlertCircle, CheckCircle2, Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { serviceTitles } from "@/lib/services";
 import { site } from "@/lib/site";
+import { clipToSmsBytes, LMS_MAX_BYTES, smsByteLength, truncateToSmsBytes } from "@/lib/sms";
 
 type Status =
   | { state: "idle" }
@@ -19,6 +20,8 @@ const labelClass = "mb-1.5 block text-sm font-bold";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>({ state: "idle" });
+  const [message, setMessage] = useState("");
+  const messageBytes = smsByteLength(message);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,6 +58,7 @@ export function ContactForm() {
       }
 
       form.reset();
+      setMessage("");
       setStatus({ state: "success", testMode: Boolean(result.testMode) });
     } catch {
       setStatus({
@@ -154,10 +158,14 @@ export function ContactForm() {
             name="message"
             required
             rows={5}
-            maxLength={2000}
+            value={message}
+            onChange={(event) => setMessage(truncateToSmsBytes(event.target.value, LMS_MAX_BYTES))}
             placeholder="건물 층수, 청소가 필요한 범위, 희망 일정을 적어주시면 상담이 빨라집니다."
             className="w-full rounded-xl border border-line bg-white px-4 py-3 text-[0.95rem] leading-relaxed text-ink placeholder:text-ink-muted/70 focus:border-brand-strong"
           />
+          <p className="mt-1.5 text-right text-xs text-ink-muted" aria-live="polite">
+            {messageBytes} / {LMS_MAX_BYTES}바이트
+          </p>
         </div>
       </fieldset>
 
@@ -202,8 +210,11 @@ export function ContactForm() {
                 <>
                   현재는 <strong className="font-bold">테스트 모드</strong>로, 입력 내용이 실제로
                   전송되지 않고 서버 로그에만 기록됩니다. 실제 접수를 받으려면{" "}
-                  <code className="rounded bg-white px-1 py-0.5 text-[0.8rem]">SENDON_ID</code>,{" "}
-                  <code className="rounded bg-white px-1 py-0.5 text-[0.8rem]">SENDON_API_KEY</code>{" "}
+                  <code className="rounded bg-white px-1 py-0.5 text-[0.8rem]">SOLAPI_API_KEY</code>
+                  ,{" "}
+                  <code className="rounded bg-white px-1 py-0.5 text-[0.8rem]">
+                    SOLAPI_API_SECRET
+                  </code>{" "}
                   를 설정하세요. 급한 문의는 {site.phone} 으로 연락해 주세요.
                 </>
               ) : (

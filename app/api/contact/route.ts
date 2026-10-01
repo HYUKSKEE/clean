@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { isSendonConfigured, sendContactLms } from "@/lib/sendon";
+import { isSolapiConfigured, sendContactLms } from "@/lib/solapi";
+import { LMS_MAX_BYTES, smsByteLength } from "@/lib/sms";
 
 export type ContactPayload = {
   name: string;
@@ -30,10 +31,11 @@ export async function POST(request: Request) {
     !isFilled(name, 40) ||
     !isFilled(phone, 40) ||
     !isFilled(serviceType, 60) ||
-    !isFilled(message)
+    !isFilled(message) ||
+    smsByteLength(message.trim()) > LMS_MAX_BYTES
   ) {
     return NextResponse.json(
-      { ok: false, error: "필수 항목을 모두 입력해 주세요." },
+      { ok: false, error: "필수 항목을 모두 입력해 주세요. 문의 내용은 2000바이트까지입니다." },
       { status: 422 },
     );
   }
@@ -48,15 +50,15 @@ export async function POST(request: Request) {
   };
 
   const webhook = process.env.CONTACT_WEBHOOK_URL?.trim();
-  const sendonReady = isSendonConfigured();
+  const solapiReady = isSolapiConfigured();
 
-  if (!webhook && !sendonReady) {
+  if (!webhook && !solapiReady) {
     console.info("[contact] 테스트 모드 접수 (전송되지 않음):", payload);
     return NextResponse.json({ ok: true, testMode: true });
   }
 
   try {
-    if (sendonReady) {
+    if (solapiReady) {
       await sendContactLms(payload);
     }
 
