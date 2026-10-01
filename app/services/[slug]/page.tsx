@@ -4,6 +4,7 @@ import { SiteShell } from "@/components/layout/SiteShell";
 import { ServiceDetailArticle } from "@/components/sections/ServiceDetailArticle";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getService, services } from "@/lib/services";
+import { getServicePhotos } from "@/lib/service-photos";
 import { site } from "@/lib/site";
 import { serviceSchema } from "@/lib/structured-data";
 
@@ -22,6 +23,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
   const title = `${service.title} | 서울 · 경기 · 인천`;
 
+  const photos = getServicePhotos(service.slug);
+  const ogImage = photos.after ?? service.image;
+
   return {
     title,
     description: `${site.areas.join(" · ")} ${service.title} 전문. ${service.summary}`,
@@ -33,7 +37,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       title: `${service.title} – ${site.name}`,
       description: `${site.areas.join(" · ")} ${service.title} 전문. ${service.summary}`,
       url: `/services/${service.slug}`,
-      images: [{ url: service.image, alt: service.imageAlt }],
+      images: [{ url: ogImage, alt: photos.after ? `${service.title} 청소 후` : service.imageAlt }],
     },
   };
 }

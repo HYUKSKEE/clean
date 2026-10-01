@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, Phone } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -6,8 +5,11 @@ import { ServiceCard } from "@/components/ui/ServiceCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { AreaPlaceNav } from "@/components/sections/AreaPlaceNav";
+import { ServiceWorks } from "@/components/sections/ServiceWorks";
+import { ImageViewerProvider, ViewablePhoto } from "@/components/ui/ImageViewer";
 import { type ServicePlace } from "@/lib/areas";
 import { type Service, services } from "@/lib/services";
+import { getServicePhotos } from "@/lib/service-photos";
 import { site, telHref } from "@/lib/site";
 
 export function ServiceDetailArticle({
@@ -20,10 +22,28 @@ export function ServiceDetailArticle({
   const related = services.filter((item) => item.slug !== service.slug).slice(0, 3);
   const areaLabel = place?.label ?? site.areas.join(" · ");
   const heading = place ? `${place.label} ${service.title}` : service.title;
+  const photos = getServicePhotos(service.slug);
+  const heroImage = photos.after ?? service.image;
+  const heroAlt = photos.after
+    ? `${heading} 청소 후`
+    : service.imageAlt;
+  const viewerImages = photos.pairs.flatMap((pair) => [
+    ...(pair.before
+      ? [{ src: pair.before, alt: `${heading} 청소 전 ${pair.index}`, caption: "청소 전" }]
+      : []),
+    ...(pair.after
+      ? [{ src: pair.after, alt: `${heading} 청소 후 ${pair.index}`, caption: "청소 후" }]
+      : []),
+  ]);
+  const gallery =
+    viewerImages.length > 0
+      ? viewerImages
+      : [{ src: heroImage, alt: heroAlt }];
 
   return (
     <>
       <article>
+        <ImageViewerProvider images={gallery}>
         <header className="border-b border-line bg-surface/60 py-12 lg:py-16">
           <div className="container-page">
             <nav aria-label="위치 경로" className="text-sm text-ink-muted">
@@ -79,21 +99,19 @@ export function ServiceDetailArticle({
                 </div>
               </div>
 
-              <figure className="m-0 overflow-hidden rounded-2xl border border-line bg-surface">
-                <Image
-                  src={service.image}
-                  alt={service.imageAlt}
-                  width={800}
-                  height={600}
+              <ViewablePhoto
+                  src={heroImage}
+                  alt={heroAlt}
+                  caption={photos.after ? "청소 후" : undefined}
+                  chip={photos.after ? "청소 후" : undefined}
+                  chipClassName="bg-brand text-ink"
                   priority
-                  sizes="(min-width: 1024px) 44vw, 100vw"
-                  className="h-full w-full object-cover"
                 />
-                <figcaption className="sr-only">{service.imageAlt}</figcaption>
-              </figure>
             </div>
           </div>
         </header>
+
+        <ServiceWorks heading={heading} pairs={photos.pairs} />
 
         <section
           aria-labelledby="method-title"
@@ -191,6 +209,7 @@ export function ServiceDetailArticle({
             </Link>
           </div>
         </section>
+        </ImageViewerProvider>
       </article>
 
       <ContactSection />

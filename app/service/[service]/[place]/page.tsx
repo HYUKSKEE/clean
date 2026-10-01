@@ -5,6 +5,7 @@ import { ServiceDetailArticle } from "@/components/sections/ServiceDetailArticle
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getPlace, places, servicePlaceHref } from "@/lib/areas";
 import { getService, services } from "@/lib/services";
+import { getServicePhotos } from "@/lib/service-photos";
 import { site } from "@/lib/site";
 import { serviceSchema } from "@/lib/structured-data";
 
@@ -29,6 +30,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     `${place.label} ${service.title}`,
     ...service.keywords.map((keyword) => `${place.label} ${keyword}`),
   ];
+  const photos = getServicePhotos(service.slug);
+  const ogImage = photos.after ?? service.image;
   const path = servicePlaceHref(service.slug, place.slug);
 
   return {
@@ -42,7 +45,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       title: `${title} – ${site.name}`,
       description,
       url: path,
-      images: [{ url: service.image, alt: service.imageAlt }],
+      images: [{ url: ogImage, alt: photos.after ? `${title} 청소 후` : service.imageAlt }],
     },
   };
 }

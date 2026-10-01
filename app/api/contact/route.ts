@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { isSendonConfigured, sendContactLms } from "@/lib/sendon";
 
 export type ContactPayload = {
   name: string;
@@ -46,22 +47,28 @@ export async function POST(request: Request) {
     receivedAt: new Date().toISOString(),
   };
 
-  const webhook = process.env.CONTACT_WEBHOOK_URL;
+  const webhook = process.env.CONTACT_WEBHOOK_URL?.trim();
+  const sendonReady = isSendonConfigured();
 
-  // 전달할 엔드포인트가 없으면 테스트 모드로 동작합니다.
-  if (!webhook) {
+  if (!webhook && !sendonReady) {
     console.info("[contact] 테스트 모드 접수 (전송되지 않음):", payload);
     return NextResponse.json({ ok: true, testMode: true });
   }
 
   try {
-    const response = await fetch(webhook, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    if (sendonReady) {
+      await sendContactLms(payload);
+    }
 
-    if (!response.ok) throw new Error(`webhook responded ${response.status}`);
+    if (webhook) {
+      const response = await fetch(webhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) throw new Error(`webhook responded ${response.status}`);
+    }
 
     return NextResponse.json({ ok: true, testMode: false });
   } catch (error) {

@@ -20,15 +20,6 @@ export type ResolvedBeforeAfterCase = BeforeAfterCase & {
 
 const cases: BeforeAfterCase[] = [
   {
-    id: "window-cleaning",
-    label: "유리창 청소",
-    location: "서울 영등포구 오피스 빌딩",
-    description:
-      "대로변 매연과 물때로 흐려진 커튼월. 순수 세척 후 얼룩 없이 조망이 회복됐습니다.",
-    beforeAlt: "청소 전: 물때와 매연으로 흐려진 오피스 빌딩 유리창",
-    afterAlt: "청소 후: 얼룩 없이 투명해진 오피스 빌딩 유리창",
-  },
-  {
     id: "exterior-wall",
     label: "외벽 청소",
     location: "인천 연수구 상가 건물",
@@ -36,6 +27,24 @@ const cases: BeforeAfterCase[] = [
       "염분과 분진으로 백화가 진행된 외벽. 자재에 맞춘 수압으로 오염만 제거했습니다.",
     beforeAlt: "청소 전: 백화와 이끼로 얼룩진 건물 외벽",
     afterAlt: "청소 후: 고압세척으로 깨끗해진 건물 외벽",
+  },
+  {
+    id: "film-removal",
+    label: "시트지 제거",
+    location: "인천 부평구 폐점 매장",
+    description:
+      "오래 붙어 굳은 시트지와 접착 자국을 스크래치 없이 걷어내고 유리면을 다시 마감했습니다.",
+    beforeAlt: "청소 전: 유리면에 굳어 붙은 시트지와 접착 자국",
+    afterAlt: "청소 후: 시트지를 제거하고 원상 복구한 유리면",
+  },
+  {
+    id: "window-cleaning",
+    label: "유리창 청소",
+    location: "서울 영등포구 오피스 빌딩",
+    description:
+      "대로변 매연과 물때로 흐려진 커튼월. 순수 세척 후 얼룩 없이 조망이 회복됐습니다.",
+    beforeAlt: "청소 전: 물때와 매연으로 흐려진 오피스 빌딩 유리창",
+    afterAlt: "청소 후: 얼룩 없이 투명해진 오피스 빌딩 유리창",
   },
   {
     id: "signage",
@@ -54,15 +63,6 @@ const cases: BeforeAfterCase[] = [
       "곰팡이와 이끼가 번진 어닝을 원단 손상 없이 세척해 매장 테라스 외관을 되살렸습니다.",
     beforeAlt: "청소 전: 곰팡이와 이끼로 오염된 매장 어닝",
     afterAlt: "청소 후: 세척으로 깨끗해진 매장 어닝",
-  },
-  {
-    id: "film-removal",
-    label: "시트지 제거",
-    location: "인천 부평구 폐점 매장",
-    description:
-      "오래 붙어 굳은 시트지와 접착 자국을 스크래치 없이 걷어내고 유리면을 다시 마감했습니다.",
-    beforeAlt: "청소 전: 유리면에 굳어 붙은 시트지와 접착 자국",
-    afterAlt: "청소 후: 시트지를 제거하고 원상 복구한 유리면",
   },
   {
     id: "specialized-cleaning",

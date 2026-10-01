@@ -202,10 +202,9 @@ export function ContactForm() {
                 <>
                   현재는 <strong className="font-bold">테스트 모드</strong>로, 입력 내용이 실제로
                   전송되지 않고 서버 로그에만 기록됩니다. 실제 접수를 받으려면{" "}
-                  <code className="rounded bg-white px-1 py-0.5 text-[0.8rem]">
-                    CONTACT_WEBHOOK_URL
-                  </code>{" "}
-                  환경 변수를 설정하세요. 급한 문의는 {site.phone} 으로 연락해 주세요.
+                  <code className="rounded bg-white px-1 py-0.5 text-[0.8rem]">SENDON_ID</code>,{" "}
+                  <code className="rounded bg-white px-1 py-0.5 text-[0.8rem]">SENDON_API_KEY</code>{" "}
+                  를 설정하세요. 급한 문의는 {site.phone} 으로 연락해 주세요.
                 </>
               ) : (
                 <>영업시간 기준 당일에 {site.phone} 번호로 연락드리겠습니다.</>

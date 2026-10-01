@@ -6,15 +6,17 @@
  *   public/assets/hero/mob_01.png        모바일 슬라이드 (prefix: mob_ , 01~04)
  *   public/assets/hero/background.*      슬라이드 뒤 커버 배경 (슬라이드에 포함하지 않음)
  *   public/assets/before-after/<슬러그>/ 전후 비교
+ *   public/assets/services/<슬러그>/     서비스 카드·상세 사진 (n-1 before, n-2 after)
  *
  * 전후 사진 폴더명은 lib/services.ts 의 slug 와 같은 kebab-case 입니다.
- * 파일명은 before · after 이고 확장자는 제한이 없습니다.
+ * before-after 폴더는 before · after, services 폴더는 n-1(전) · n-2(후) 입니다.
  */
 
 export const logoAssetRoot = "/assets/logo";
 export const heroAssetRoot = "/assets/hero";
 export const heroMobilePrefix = "mob_";
 export const beforeAfterAssetRoot = "/assets/before-after";
+export const servicePhotoRoot = "/assets/services";
 
 export type HeroSlide = {
   src: string;
