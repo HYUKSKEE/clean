@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { AreaPlaceNav } from "@/components/sections/AreaPlaceNav";
 import { ServiceWorks } from "@/components/sections/ServiceWorks";
+import { BeforeAfterSlider } from "@/components/ui/BeforeAfterSlider";
 import { ImageViewerProvider, ViewablePhoto } from "@/components/ui/ImageViewer";
 import { type ServicePlace } from "@/lib/areas";
 import { type Service, services } from "@/lib/services";
@@ -99,7 +100,21 @@ export function ServiceDetailArticle({
                 </div>
               </div>
 
-              <ViewablePhoto
+              {photos.before && photos.after ? (
+                <BeforeAfterSlider
+                  beforeImage={photos.before}
+                  afterImage={photos.after}
+                  beforeAlt={`${heading} 청소 전`}
+                  afterAlt={`${heading} 청소 후`}
+                  beforeLabel="청소 전"
+                  afterLabel="청소 후"
+                  caption={`${heading} 청소 전후`}
+                  priority
+                  sizes="(min-width: 640px) 500px, 100vw"
+                  className="mx-auto aspect-[10/7] w-[500px] max-w-full"
+                />
+              ) : (
+                <ViewablePhoto
                   src={heroImage}
                   alt={heroAlt}
                   caption={photos.after ? "청소 후" : undefined}
@@ -107,6 +122,7 @@ export function ServiceDetailArticle({
                   chipClassName="bg-brand text-ink"
                   priority
                 />
+              )}
             </div>
           </div>
         </header>

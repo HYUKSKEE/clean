@@ -4,6 +4,7 @@ import { useId, useState } from "react";
 import Image from "next/image";
 import { MoveHorizontal } from "lucide-react";
 import { isNextOptimizedImage } from "@/lib/assets";
+import { cn } from "@/lib/utils";
 
 type Props = {
   beforeImage: string;
@@ -11,6 +12,11 @@ type Props = {
   beforeAlt: string;
   afterAlt: string;
   caption?: string;
+  beforeLabel?: string;
+  afterLabel?: string;
+  className?: string;
+  sizes?: string;
+  priority?: boolean;
   /** 초기 손잡이 위치(%) */
   initial?: number;
 };
@@ -25,19 +31,30 @@ export function BeforeAfterSlider({
   beforeAlt,
   afterAlt,
   caption,
+  beforeLabel = "BEFORE",
+  afterLabel = "AFTER",
+  className,
+  sizes = "(min-width: 1024px) 60vw, 100vw",
+  priority = false,
   initial = 50,
 }: Props) {
   const [value, setValue] = useState(initial);
   const id = useId();
 
   return (
-    <figure className="relative m-0 aspect-4/3 w-full overflow-hidden rounded-2xl border border-line bg-surface select-none">
+    <figure
+      className={cn(
+        "relative m-0 w-full overflow-hidden rounded-2xl border border-line bg-surface select-none",
+        className ?? "aspect-4/3",
+      )}
+    >
       {/* 청소 후 이미지가 바탕, 청소 전 이미지를 왼쪽에서 잘라 보여줍니다 */}
       <Image
         src={afterImage}
         alt={afterAlt}
         fill
-        sizes="(min-width: 1024px) 60vw, 100vw"
+        priority={priority}
+        sizes={sizes}
         unoptimized={!isNextOptimizedImage(afterImage)}
         className="object-cover"
       />
@@ -45,7 +62,7 @@ export function BeforeAfterSlider({
         aria-hidden
         className="pointer-events-none absolute top-3 right-3 rounded-full bg-brand px-3 py-1 text-xs font-bold tracking-wide text-ink"
       >
-        AFTER
+        {afterLabel}
       </span>
 
       <div
@@ -56,7 +73,8 @@ export function BeforeAfterSlider({
           src={beforeImage}
           alt={beforeAlt}
           fill
-          sizes="(min-width: 1024px) 60vw, 100vw"
+          priority={priority}
+          sizes={sizes}
           unoptimized={!isNextOptimizedImage(beforeImage)}
           className="object-cover"
         />
@@ -64,7 +82,7 @@ export function BeforeAfterSlider({
           aria-hidden
           className="pointer-events-none absolute top-3 left-3 rounded-full bg-ink/80 px-3 py-1 text-xs font-bold tracking-wide text-white"
         >
-          BEFORE
+          {beforeLabel}
         </span>
       </div>
 
