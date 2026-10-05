@@ -22,7 +22,7 @@ export const trustFeatures: TrustFeature[] = [
   {
     title: "안전 작업",
     description:
-      "안전 교육을 이수한 작업자가 안전하게 점검 후 시공합니다.",
+      "안전 교육을 이수한 작업자가 현장 위험요소를 사전 점검한 후 시공합니다.",
     icon: HardHat,
   },
   {
@@ -34,7 +34,7 @@ export const trustFeatures: TrustFeature[] = [
   {
     title: "친환경 세제",
     description:
-      "인체와 조경에 무해한 세정제를 사용해 거주 중인 건물도 안심하고 시공합니다.",
+      "인체와 주변 환경을 고려한 친환경 세정제를 사용해 거주 중인 건물도 안심하고 시공합니다.",
     icon: Leaf,
   },
 ];
