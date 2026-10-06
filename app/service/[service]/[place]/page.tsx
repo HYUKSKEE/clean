@@ -4,6 +4,7 @@ import { SiteShell } from "@/components/layout/SiteShell";
 import { ServiceDetailArticle } from "@/components/sections/ServiceDetailArticle";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getPlace, places, servicePlaceHref } from "@/lib/areas";
+import { placeServiceKeywords } from "@/lib/place-keywords";
 import { getService, services } from "@/lib/services";
 import { getServicePhotos } from "@/lib/service-photos";
 import { site } from "@/lib/site";
@@ -26,10 +27,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
   const title = `${place.label} ${service.title}`;
   const description = `${place.label} ${service.title} 전문. ${service.summary}`;
-  const keywords = [
-    `${place.label} ${service.title}`,
-    ...service.keywords.map((keyword) => `${place.label} ${keyword}`),
-  ];
+  const keywords = placeServiceKeywords(place, service.keywords);
   const photos = getServicePhotos(service.slug);
   const ogImage = photos.after ?? service.image;
   const path = servicePlaceHref(service.slug, place.slug);
