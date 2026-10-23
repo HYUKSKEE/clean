@@ -5,6 +5,7 @@ import { AlertCircle, CheckCircle2, Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { serviceTitles } from "@/lib/services";
 import { site } from "@/lib/site";
+import { trackSmartlogInquiry } from "@/lib/smartlog";
 import { clipToSmsBytes, LMS_MAX_BYTES, smsByteLength, truncateToSmsBytes } from "@/lib/sms";
 
 type Status =
@@ -60,6 +61,7 @@ export function ContactForm() {
       form.reset();
       setMessage("");
       setStatus({ state: "success", testMode: Boolean(result.testMode) });
+      if (!result.testMode) trackSmartlogInquiry();
     } catch {
       setStatus({
         state: "error",

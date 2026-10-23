@@ -108,6 +108,26 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 })(window, document, "clarity", "script", "youmi7kbib");`}
         </Script>
 
+        <Script id="smartlog-config" strategy="afterInteractive">
+          {`var hpt_info={'_account':'UHPT-39343', '_server': 'a31'};`}
+        </Script>
+        <Script
+          id="smartlog"
+          src="https://cdn.smlog.co.kr/core/smart.js"
+          charSet="utf-8"
+          strategy="afterInteractive"
+        />
+        <noscript>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://a31.smlog.co.kr/smart_bda.php?_account=39343"
+            alt=""
+            width={0}
+            height={0}
+            style={{ display: "none" }}
+          />
+        </noscript>
+
         {/* Vercel Analytics – 배포 환경에서만 데이터를 전송합니다. */}
         <Analytics />
       </body>
