@@ -1,7 +1,9 @@
+import { Phone } from "lucide-react";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { services } from "@/lib/services";
+import { telHref } from "@/lib/site";
 
 export function ServiceGrid() {
   return (
@@ -34,8 +36,9 @@ export function ServiceGrid() {
                 건물 사진 한 장만 보내주셔도 서울 · 경기 · 인천 출장 기준으로 필요한 청소 범위와
                 예상 비용을 정리해 안내드립니다.
               </p>
-              <Button href="/#contact" className="mt-5 self-center" size="lg">
-                무료 견적 문의
+              <Button href={telHref} className="mt-5 self-center" size="lg">
+                <Phone className="size-4" aria-hidden />
+                전화 문의
               </Button>
             </aside>
           </li>

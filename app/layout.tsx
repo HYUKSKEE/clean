@@ -117,6 +117,28 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
           charSet="utf-8"
           strategy="afterInteractive"
         />
+        {/* 네이버 광고 전환 추적: 공통(PV) 스크립트 + tel: 링크 클릭을 전환(custom001)으로 전송 */}
+        <Script id="naver-wcs" strategy="afterInteractive">
+          {`(function(){
+var s=document.createElement("script");
+s.src="https://wcs.naver.net/wcslog.js";
+s.async=true;
+s.onload=function(){
+if(!window.wcs_add) window.wcs_add={};
+window.wcs_add["wa"]="s_2cba7395b448";
+if(!window._nasa) window._nasa={};
+if(window.wcs){ wcs.inflow(); wcs_do(); }
+};
+document.head.appendChild(s);
+document.addEventListener("click",function(e){
+var a=e.target&&e.target.closest&&e.target.closest('a[href^="tel:"]');
+if(!a) return;
+try{
+if(window.wcs){ wcs.trans({type:"custom001"}); }
+}catch(err){}
+},true);
+})();`}
+        </Script>
         <noscript>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
